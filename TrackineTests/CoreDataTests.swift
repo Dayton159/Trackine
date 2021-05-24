@@ -88,11 +88,12 @@ class CoreDataTests: XCTestCase {
     }
     
     func testUpdateTool() {
-        guard let model = createLoanModel(),
-              let friendTools = model.byFriend.tools?.allObjects as? [CDTools],
-              let friendTool = friendTools.first else { return }
+        guard let model = createLoanModel() else { return }
 
         CoreDataHelper.updateTool(model)
+        
+        guard let friendTools = model.byFriend.tools?.allObjects as? [CDTools],
+              let friendTool = friendTools.first else { return }
         
         XCTAssertEqual(2, model.tools.itemCount)
         XCTAssertEqual(1, friendTool.itemCount)
